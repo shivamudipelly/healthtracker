@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, X, Settings, Info, Moon, Sun, Calendar, Download, Droplet, Monitor, Award, Flame, Trophy, ChevronRight } from "lucide-react";
+import { CheckCircle, X, Settings, Info, Moon, Sun, Calendar, Download, Droplet, Monitor, Award, Flame, Trophy, ChevronRight, User, User2 } from "lucide-react";
 import * as html2canvas from "html2canvas";
 import Image from "next/image";
 
@@ -117,7 +117,7 @@ const MOCK_DATA: DailyRecord[] = [
 
 const USER_DATA: User = {
   name: "Alex Morgan",
-  avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+  avatar: "",
   joinDate: "2025-03-15",
   currentStreak: 3,
   longestStreak: 5,
@@ -374,15 +374,15 @@ export default function HabitTracker() {
   }> = React.memo(({ habit: initialHabit, today }) => {
     // Local state for the habit values
     const [localHabit, setLocalHabit] = useState(initialHabit);
-    
+
     // Update local state when the prop changes
     useEffect(() => {
       setLocalHabit(initialHabit);
     }, [initialHabit]);
-  
-    const maxValue = localHabit.id === "sleep" ? 12 : 
-                    localHabit.id === "water" ? 4000 : 12;
-  
+
+    const maxValue = localHabit.id === "sleep" ? 12 :
+      localHabit.id === "water" ? 4000 : 12;
+
     // Handle value changes locally
     const handleValueChange = (value: number) => {
       setLocalHabit(prev => ({
@@ -390,12 +390,12 @@ export default function HabitTracker() {
         currentValue: value
       }));
     };
-  
+
     // Only update global state when interaction is complete
     const handleChangeComplete = useCallback(() => {
       updateHabitValue(localHabit.id, localHabit.currentValue);
     }, [localHabit.id, localHabit.currentValue]);
-  
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -409,16 +409,15 @@ export default function HabitTracker() {
             <h3 className="ml-2 text-lg font-medium">{localHabit.name}</h3>
           </div>
           <span
-            className={`text-sm font-medium px-2 py-1 rounded-full ${
-              today.completed[localHabit.id]
+            className={`text-sm font-medium px-2 py-1 rounded-full ${today.completed[localHabit.id]
                 ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                 : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-            }`}
+              }`}
           >
             {today.completed[localHabit.id] ? "Completed" : "In Progress"}
           </span>
         </div>
-  
+
         <div className="mb-4">
           <div className="flex justify-between items-center mb-1 text-sm">
             <span>
@@ -443,7 +442,7 @@ export default function HabitTracker() {
             />
           </div>
         </div>
-  
+
         <div>
           <div className="flex justify-between items-center mb-1">
             <span className="text-sm font-medium">Update today&apos;s value</span>
@@ -467,14 +466,14 @@ export default function HabitTracker() {
             }}
           />
         </div>
-  
+
         <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
           Weekly completion: {calculateCompletion(localHabit.id)}%
         </div>
       </motion.div>
     );
   });
-  
+
   HabitCard.displayName = "HabitCard";
 
 
@@ -514,79 +513,79 @@ export default function HabitTracker() {
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}
         <header className="mb-24 md:mb-32 text-center">
-      {/* Text Content */}
-      <motion.div
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="mb-8"
-      >
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="bg-indigo-100 dark:bg-indigo-900/30 w-max mx-auto p-3 rounded-2xl mb-6"
-        >
-          <Trophy className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
-        </motion.div>
-        
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-300 mb-4">
-          Transform Your Habits
-        </h1>
-        
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-        >
-          Build better routines with AI-powered insights, personalized tracking, and science-backed strategies
-        </motion.p>
-      </motion.div>
+          {/* Text Content */}
+          <motion.div
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="bg-indigo-100 dark:bg-indigo-900/30 w-max mx-auto p-3 rounded-2xl mb-6"
+            >
+              <Trophy className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
+            </motion.div>
 
-      {/* Image with Featured Brands */}
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="relative"
-      >
-        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
-          <Image
-            src="https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW5hbHl0aWNzJTIwZGFzaGJvYXJkfGVufDB8fDB8fHww"
-            alt="App dashboard preview"
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
-            className="rounded-3xl shadow-2xl border-8 border-white dark:border-gray-800 mx-auto object-cover"
-            priority
-          />
-        </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-300 mb-4">
+              Transform Your Habits
+            </h1>
 
-        {/* Featured Brands Badge */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-lg flex items-center gap-4 border border-gray-100 dark:border-gray-700"
-        >
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Featured on
-          </span>
-          
-          <div className="flex gap-4">
-            {featuredBrands.map((brand, index) => (
-              <motion.span
-                key={brand.name}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-                className={`font-bold ${brand.color} ${brand.hoverColor} transition-colors`}
-              >
-                {brand.name}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
-    </header>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            >
+              Build better routines with AI-powered insights, personalized tracking, and science-backed strategies
+            </motion.p>
+          </motion.div>
+
+          {/* Image with Featured Brands */}
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="relative"
+          >
+            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px]">
+              <Image
+                src="https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW5hbHl0aWNzJTIwZGFzaGJvYXJkfGVufDB8fDB8fHww"
+                alt="App dashboard preview"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 1200px"
+                className="rounded-3xl shadow-2xl border-8 border-white dark:border-gray-800 mx-auto object-cover"
+                priority
+              />
+            </div>
+
+            {/* Featured Brands Badge */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-lg flex items-center gap-4 border border-gray-100 dark:border-gray-700"
+            >
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-300">
+                Featured on
+              </span>
+
+              <div className="flex gap-4">
+                {featuredBrands.map((brand, index) => (
+                  <motion.span
+                    key={brand.name}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 + index * 0.1 }}
+                    className={`font-bold ${brand.color} ${brand.hoverColor} transition-colors`}
+                  >
+                    {brand.name}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </header>
 
 
         {/* Features Grid */}
@@ -956,7 +955,7 @@ export default function HabitTracker() {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <CheckCircle className="h-6 w-6 text-indigo-600 dark:text-indigo-400 mr-2" />
-            <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400 cursor-pointer" onClick={()=>setShowLanding(true)}>HabitFlow</span>
+            <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400 cursor-pointer" onClick={() => setShowLanding(true)}>HabitFlow</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -983,14 +982,8 @@ export default function HabitTracker() {
             </motion.button>
 
             <div className="flex items-center">
-              <div className="relative h-8 w-8">
-                <Image
-                  src={user.avatar}
-                  alt={user.name || 'User avatar'}
-                  fill
-                  className="rounded-full object-cover border-2 border-indigo-200 dark:border-indigo-700"
-                  sizes="32px"
-                />
+              <div className="relative h-8 w-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 border-2 border-indigo-200 dark:border-indigo-700">
+                <User2 className="h-4 w-4 text-gray-600 dark:text-gray-300" />
               </div>
               <span className="ml-2 font-medium hidden sm:inline">{user.name}</span>
             </div>
@@ -1082,20 +1075,20 @@ export default function HabitTracker() {
   );
 
   // Settings Modal
-  
+
   const SettingsModal = () => {
     // Local state to store temporary changes
     const [localHabits, setLocalHabits] = useState(habits);
     const [localDarkMode, setLocalDarkMode] = useState(darkMode);
     const [localChartType, setLocalChartType] = useState(chartType);
-  
+
     // Update local state when props change
     useEffect(() => {
       setLocalHabits(habits);
       setLocalDarkMode(darkMode);
       setLocalChartType(chartType);
     }, [habits, darkMode, chartType]);
-  
+
     const handleSave = () => {
       // Update all habit goals
       localHabits.forEach(habit => {
@@ -1104,22 +1097,22 @@ export default function HabitTracker() {
           updateGoalValue(habit.id, habit.goalValue);
         }
       });
-  
+
       // Update dark mode if changed
       if (localDarkMode !== darkMode) {
         setDarkMode(localDarkMode);
       }
-  
+
       // Update chart type if changed
       if (localChartType !== chartType) {
         setChartType(localChartType);
       }
-  
+
       setShowSettings(false);
     };
-  
+
     if (!showSettings) return null;
-  
+
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -1142,7 +1135,7 @@ export default function HabitTracker() {
               <X className="h-6 w-6" />
             </button>
           </div>
-  
+
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium mb-3">Habit Goals</h3>
@@ -1164,7 +1157,7 @@ export default function HabitTracker() {
                     step={habit.id === "sleep" ? 0.5 : habit.id === "water" ? 100 : 0.5}
                     value={habit.goalValue}
                     onChange={(e) => {
-                      setLocalHabits(prev => prev.map(h => 
+                      setLocalHabits(prev => prev.map(h =>
                         h.id === habit.id ? { ...h, goalValue: parseFloat(e.target.value) } : h
                       ));
                     }}
@@ -1176,7 +1169,7 @@ export default function HabitTracker() {
                 </div>
               ))}
             </div>
-  
+
             <div>
               <h3 className="text-lg font-medium mb-3">Display Preferences</h3>
               <div className="flex items-center justify-between">
@@ -1190,7 +1183,7 @@ export default function HabitTracker() {
                   />
                 </div>
               </div>
-  
+
               <div className="flex items-center justify-between mt-3">
                 <span>Chart Type</span>
                 <div className="flex border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden">
@@ -1213,7 +1206,7 @@ export default function HabitTracker() {
                 </div>
               </div>
             </div>
-  
+
             <div className="flex justify-end gap-3 mt-6">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -1237,7 +1230,7 @@ export default function HabitTracker() {
       </motion.div>
     );
   };
-  
+
 
   // Badge Info Modal
   const BadgeInfoModal = ({ badgeId }: { badgeId: string }) => {
@@ -1358,13 +1351,13 @@ export default function HabitTracker() {
 
   return (
     <div className="min-h-screen w-full">
-    {showLanding ? (
-      <LandingPage />
-    ) : (
-      <div className="min-h-screen w-full">
-        <MainApp />
-      </div>
-    )}
-  </div>
+      {showLanding ? (
+        <LandingPage />
+      ) : (
+        <div className="min-h-screen w-full">
+          <MainApp />
+        </div>
+      )}
+    </div>
   )
 }
